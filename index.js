@@ -32,8 +32,14 @@ async function run() {
                   const result = await cursor.toArray()
                   res.send(result);
             })
-            // const brandName = req.params.brandName;
-            // const products = await Product.find({ brand: brandName });
+            
+            // get user through id
+            app.get('/products/:id', async (req, res) => {
+                  const id = req.params.id;
+                  const query = { _id: new ObjectId(id) };
+                  const result = await productsCollection.findOne(query);
+                  res.send(result);
+            })
 
             // Nike
             app.get('/products/:Nike', async (req, res) => {
@@ -44,7 +50,7 @@ async function run() {
                   res.send(result);
             });
             // Adidas
-            app.get('Adidas', async (req, res) => {
+            app.get('/Adidas', async (req, res) => {
                   const { Adidas } = req.params;
                   const query = { brand: Adidas }
                   const cursor = productsCollection.find(query);
@@ -52,7 +58,7 @@ async function run() {
                   res.send(result);
             });
             // Zara
-            app.get('Zara', async (req, res) => {
+            app.get('/Zara', async (req, res) => {
                   const { Zara } = req.params;
                   const query = { brand: Zara }
                   const cursor = productsCollection.find(query);
@@ -60,7 +66,7 @@ async function run() {
                   res.send(result);
             });
             // HM
-            app.get('HM', async (req, res) => {
+            app.get('/HM', async (req, res) => {
                   const { HM } = req.params;
                   const query = { brand: HM }
                   const cursor = productsCollection.find(query);
@@ -68,7 +74,7 @@ async function run() {
                   res.send(result);
             });
             // Levis
-            app.get('Levis', async (req, res) => {
+            app.get('/Levis', async (req, res) => {
                   const { Levis } = req.params;
                   const query = { brand: Levis }
                   const cursor = productsCollection.find(query);
