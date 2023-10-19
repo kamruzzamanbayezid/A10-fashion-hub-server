@@ -43,6 +43,38 @@ async function run() {
                   const result = await cursor.toArray();
                   res.send(result);
             });
+            // Adidas
+            app.get('Adidas', async (req, res) => {
+                  const { Adidas } = req.params;
+                  const query = { brand: Adidas }
+                  const cursor = productsCollection.find(query);
+                  const result = await cursor.toArray();
+                  res.send(result);
+            });
+            // Zara
+            app.get('Zara', async (req, res) => {
+                  const { Zara } = req.params;
+                  const query = { brand: Zara }
+                  const cursor = productsCollection.find(query);
+                  const result = await cursor.toArray();
+                  res.send(result);
+            });
+            // HM
+            app.get('HM', async (req, res) => {
+                  const { HM } = req.params;
+                  const query = { brand: HM }
+                  const cursor = productsCollection.find(query);
+                  const result = await cursor.toArray();
+                  res.send(result);
+            });
+            // Levis
+            app.get('Levis', async (req, res) => {
+                  const { Levis } = req.params;
+                  const query = { brand: Levis }
+                  const cursor = productsCollection.find(query);
+                  const result = await cursor.toArray();
+                  res.send(result);
+            });
 
             app.post('/products', async (req, res) => {
                   const products = req.body;
