@@ -32,9 +32,9 @@ async function run() {
                   const result = await cursor.toArray()
                   res.send(result);
             })
-            
+
             // get user through id
-            app.get('/products/:id', async (req, res) => {
+            app.get('/productSingle/:id', async (req, res) => {
                   const id = req.params.id;
                   const query = { _id: new ObjectId(id) };
                   const result = await productsCollection.findOne(query);
@@ -50,7 +50,7 @@ async function run() {
                   res.send(result);
             });
             // Adidas
-            app.get('/Adidas', async (req, res) => {
+            app.get('/products/:Adidas', async (req, res) => {
                   const { Adidas } = req.params;
                   const query = { brand: Adidas }
                   const cursor = productsCollection.find(query);
@@ -58,7 +58,7 @@ async function run() {
                   res.send(result);
             });
             // Zara
-            app.get('/Zara', async (req, res) => {
+            app.get('/products/:Zara', async (req, res) => {
                   const { Zara } = req.params;
                   const query = { brand: Zara }
                   const cursor = productsCollection.find(query);
@@ -66,7 +66,7 @@ async function run() {
                   res.send(result);
             });
             // HM
-            app.get('/HM', async (req, res) => {
+            app.get('/products/:HM', async (req, res) => {
                   const { HM } = req.params;
                   const query = { brand: HM }
                   const cursor = productsCollection.find(query);
@@ -74,13 +74,33 @@ async function run() {
                   res.send(result);
             });
             // Levis
-            app.get('/Levis', async (req, res) => {
+            app.get('/products/:Levis', async (req, res) => {
                   const { Levis } = req.params;
                   const query = { brand: Levis }
                   const cursor = productsCollection.find(query);
                   const result = await cursor.toArray();
                   res.send(result);
             });
+
+            // update product
+            app.put('/products/:id', async (req, res) => {
+                  const id = req.params.id;
+                  const product = req.body;
+                  const filter = { _id: new ObjectId(id) }
+                  const options = { upsert: true };
+                  const updatedProduct = {
+                        $set: {
+                              image: product.image,
+                              name: product.name,
+                              brand: product.brand,
+                              type: product.type,
+                              price: product.price,
+                              rating: product.rating,
+                        },
+                  };
+                  const result = await productsCollection.updateOne(filter, updatedProduct, options);
+                  res.send(result);
+            })
 
             app.post('/products', async (req, res) => {
                   const products = req.body;
